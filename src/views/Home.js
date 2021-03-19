@@ -1,83 +1,117 @@
+import {useState} from 'react'
 import {useAuth} from '../controller/AuthContext'
-import {Button, Container, Row,Col,Dropdown,Navbar } from 'react-bootstrap'
+import {Button,Row,Col} from 'react-bootstrap'
 import {firestore} from '../firebase'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import {useCollectionData} from 'react-firebase-hooks/firestore'
 import ListItemPost from '../components/ListItemPost'
-import style from '../../src/style.css'
+import style from '../custom.module.scss'
+import {BiHelpCircle} from 'react-icons/bi';
+import {HiOutlineLogout} from 'react-icons/hi';
+import {RiNotificationLine,RiAddFill,RiFilterLine,RiFilterOffLine} from 'react-icons/ri';
 
 
-
+//*Main
 export function Home(){
-    const {signOut, currentUser} = useAuth();
+    const {currentUser} = useAuth();
+    const [showAll, setShowAll] = useState(true)
     const postsRef = firestore.collection('posts')
-    const query = postsRef.orderBy('created').limit(50);
-
+    const query = postsRef.orderBy('created','desc').limit(50);
     const [posts] = useCollectionData(query, {idField:'id'});
     
+    return (
+        <>
+            <HomeHeader showAll={showAll} setShowAll={setShowAll}/>
+            { showAll ? posts && posts.map(item => <ListItemPost key={item.id} post={item}/> ) : posts && posts.map(item => item.uid == currentUser.uid ? <ListItemPost key={item.id} post={item}/> : null ) }
+        </>
+    )
+}
+
+//*Components
+function HomeHeader(props){
+    return (
+        <Row className={style.stickyHeader}>
+            <Col sm={2}>
+                <div className={style.center}>
+                    <FilterPostButton showAll={props.showAll} setShowAll={props.setShowAll}/>
+                </div>
+            </Col>
+            <Col sm={1}>
+                <div className={style.center}>
+                    <AddPostButton/>
+                </div>
+            </Col>
+            <Col  />
+            <Col sm={1}>
+                <div className={style.center}>
+                    <NotificationButton/>
+                </div>
+            </Col>
+            <Col sm={1}>
+                <div className={style.center}>
+                    <HelpButton/>
+                </div>
+            </Col>
+            <Col sm={1}>
+                <div className={style.center}>
+                    <LogoutButton/>
+                </div>
+            </Col>
+        </Row>
+        )
+}
+//*Buttons
+function FilterPostButton(props){
+    
+
+    return (
+        <Button onClick={()=>props.setShowAll(!props.showAll)}  id={style.filterPostButton}>
+            {props.showAll ? <><RiFilterLine size="20" className={style.showAllIcon}/> Show all</> : <><RiFilterOffLine size="20" className={style.showAllIcon}/> Show mine</>}
+        </Button>
+    )
+}
+
+function AddPostButton() {
+    return (
+        <Button id={style.addPostButton} >
+            <div className={style.center}>
+                <RiAddFill size="25"  />
+            </div>
+        </Button>        
+    )
+}
+
+function NotificationButton() {
+    return (
+        <Button id={style.notificationButton}>
+            <div className={style.center}>
+                <RiNotificationLine size="25"  />
+            </div>
+        </Button>        
+    )
+}
+
+function HelpButton() {
+    return (
+        <Button id={style.helpButton}>
+            <div className={style.center}>
+                <BiHelpCircle size="25" />
+            </div>
+        </Button>        
+    )
+}
+
+function LogoutButton() {
+    const {signOut} = useAuth();
 
     async function logout(){
         await signOut()
     }
 
     return (
-        <div>
-            <HomeHeader />
-            {currentUser && currentUser.email}<br/>
-            <Button onClick={logout}>logout</Button>
-            <div>
-                {posts && posts.map(item => <ListItemPost key={item.id} post={item}/>)}
+        <Button onClick={logout} id={style.logoutButton}>
+            <div className={style.center}>
+                <HiOutlineLogout size="25" />
             </div>
-        </div>
-        
-       
-    )
-}
-
-function HomeHeader(){
-    return (
-        <div >
-            <Row className={style.stickyHeader}>
-                <Col sm={3} style={{backgroundColor:'blue'}}>
-                    <FilterPostsButton />
-                </Col>
-                <Col sm={1} style={{backgroundColor:'green'}}>
-                    2
-                </Col>
-                <Col lg style={{backgroundColor:'yellow'}}>
-                    3
-                </Col>
-                <Col sm={1} style={{backgroundColor:'purple'}}>
-                    4
-                </Col>
-                <Col sm={1} style={{backgroundColor:'red'}}>
-                    5
-                </Col>
-                <Col sm={1} style={{backgroundColor:'orange'}}>
-                    6
-                </Col>
-            </Row>
-        </div>
-                
-    )
-}
-
-function FilterPostsButton(){
-return (
-    <Dropdown size="md" block>
-        <Dropdown.Toggle size="md" variant="light" id="dropdown-basic" block>
-            Show all
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Show all</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Show mine</Dropdown.Item>
-        </Dropdown.Menu>
-    </Dropdown>
-)
-}
-
-function AddPostButton() {
-    return (
-        <div></div>
+        </Button>        
     )
 }

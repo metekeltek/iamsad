@@ -1,0 +1,263 @@
+.stickyHeader{
+  z-index: 5;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  height:80px;
+  width: 100%;
+}
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.cutText{
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap;
+}
+
+.showAllIcon{
+  margin-bottom: 5px;
+}
+
+//*Main Buttons
+
+$button-base-color: #5e2caf;
+$button-click-color: #9641e6;
+$button-bg-color: #f3f0f1;
+
+
+
+#listItemPost{
+  z-index: -1;
+  width:100%;
+  height:100px;
+  margin-left:0;
+  padding-left:50px;
+ 
+}
+
+#filterPostButton {
+  width:150px;
+  border-radius: 120px;
+  color: black;
+  border:0;
+  background: $button-bg-color;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:nth-child(1) {
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      opacity: 1;
+      box-shadow: 
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+      color: $button-click-color;
+    }
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+  }
+  &:nth-child(3) {
+    box-shadow: 
+      inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: $button-click-color;
+    &:hover {
+      opacity: 1;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+#addPostButton {
+  border-radius: 100%;
+  height:50px;
+  width:50px;
+  border:0;
+
+  color: black;
+  background: $button-bg-color;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:nth-child(1) {
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      opacity: 1;
+      box-shadow: 
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+      color: $button-click-color;
+    }
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+  }
+  &:nth-child(3) {
+    box-shadow: 
+      inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: $button-click-color;
+    &:hover {
+      opacity: 1;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+#notificationButton {
+  border-radius: 100%;
+  height:50px;
+  width:50px;
+  border:0;
+  background: $button-bg-color;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:nth-child(1) {
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      opacity: 1;
+      box-shadow: 
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+      color: $button-click-color;
+    }
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+  }
+  &:nth-child(3) {
+    box-shadow: 
+      inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: $button-click-color;
+    &:hover {
+      opacity: 1;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+#helpButton {
+  border-radius: 100%;
+  height:50px;
+  width:50px;
+  border:0;
+  background: $button-bg-color;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:nth-child(1) {
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      opacity: 1;
+      box-shadow: 
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+      color: $button-click-color;
+    }
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    box-shadow:
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+  }
+  &:nth-child(3) {
+    box-shadow: 
+      inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: $button-click-color;
+    &:hover {
+      opacity: 1;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+
+#logoutButton {
+  border-radius: 100%;
+  height:50px;
+  width:50px;
+  border:0;
+  background: $button-bg-color;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  &:nth-child(1) {
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+    &:hover {
+      opacity: 0.8;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      opacity: 1;
+      box-shadow: 
+        inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+      color: $button-click-color;
+    }
+  }
+  &:nth-child(2) {
+    opacity: 0.3;
+    box-shadow: 
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: $button-base-color;
+  }
+  &:nth-child(3) {
+    box-shadow: 
+      inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: $button-click-color;
+    &:hover {
+      opacity: 1;
+      box-shadow: 
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
