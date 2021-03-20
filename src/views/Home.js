@@ -8,6 +8,7 @@ import style from '../custom.module.scss'
 import {BiHelpCircle} from 'react-icons/bi';
 import {HiOutlineLogout} from 'react-icons/hi';
 import {RiNotificationLine,RiAddFill,RiFilterLine,RiFilterOffLine} from 'react-icons/ri';
+import Create from './Create'
 
 
 //*Main
@@ -21,7 +22,7 @@ export function Home(){
     return (
         <>
             <HomeHeader showAll={showAll} setShowAll={setShowAll}/>
-            { showAll ? posts && posts.map(item => <ListItemPost key={item.id} post={item}/> ) : posts && posts.map(item => item.uid == currentUser.uid ? <ListItemPost key={item.id} post={item}/> : null ) }
+            { showAll ? posts && posts.map(item => <ListItemPost key={item.id} post={item}/> ) : posts && posts.map(item => item.uid === currentUser.uid ? <ListItemPost key={item.id} post={item}/> : null ) }
         </>
     )
 }
@@ -61,8 +62,6 @@ function HomeHeader(props){
 }
 //*Buttons
 function FilterPostButton(props){
-    
-
     return (
         <Button onClick={()=>props.setShowAll(!props.showAll)}  id={style.filterPostButton}>
             {props.showAll ? <><RiFilterLine size="20" className={style.showAllIcon}/> Show all</> : <><RiFilterOffLine size="20" className={style.showAllIcon}/> Show mine</>}
@@ -71,12 +70,16 @@ function FilterPostButton(props){
 }
 
 function AddPostButton() {
+    const [show, setShow] = useState(false);
     return (
-        <Button id={style.addPostButton} >
+        <>
+        <Button onClick={() => setShow(true)} id={style.addPostButton} >
             <div className={style.center}>
                 <RiAddFill size="25"  />
             </div>
-        </Button>        
+        </Button>
+        <Create show={show} setShow={setShow}/>
+        </>        
     )
 }
 

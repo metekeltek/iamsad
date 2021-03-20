@@ -14,18 +14,20 @@ export default function SignUp(props) {
     async function handleSubmit(e){
         e.preventDefault()
 
-        if(passwordRef.current.value !== passwordConfirmRef.current.value){
-            return setError('Passwords do not match')
+        if(!loading){
+            if(passwordRef.current.value !== passwordConfirmRef.current.value){
+                return setError('Passwords do not match')
+            }
+       
+            try{
+                setError('')
+                setLoading(true)
+                await signUp(emailRef.current.value, passwordRef.current.value)
+            }catch(e){
+                setError('Failed to create an account')
+            } 
+            setLoading(false)
         }
-   
-        try{
-            setError('')
-            setLoading(true)
-            await signUp(emailRef.current.value, passwordRef.current.value)
-        }catch(e){
-            setError('Failed to create an account')
-        } 
-        setLoading(false)
    }
     return (
      <> 

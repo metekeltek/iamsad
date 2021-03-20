@@ -13,14 +13,17 @@ export default function SignIn(props) {
     async function handleSubmit(e){
         e.preventDefault()
    
-        try{
-            setError('')
-            setLoading(true)
-            await signIn(emailRef.current.value, passwordRef.current.value)
-        }catch(e){
-            setError('Failed to sign in')
-        } 
-        setLoading(false)
+        if(!loading){
+            try{
+                setError('')
+                setLoading(true)
+                await signIn(emailRef.current.value, passwordRef.current.value)
+            }catch(e){
+                setError('Failed to sign in')
+            } 
+            setLoading(false)
+        }
+        
    }
     return (
      <> 

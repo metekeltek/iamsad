@@ -13,18 +13,20 @@ export default function ForgotPassword(props) {
     async function handleSubmit(e){
         e.preventDefault()
    
-        try{
-            setError('')
-            setSuccess('')
-            setLoading(true)
-            await forgotPassword(emailRef.current.value)
-            setSuccess('We have send you a email to reset your password')
-        }catch(e){
-            setSuccess('')
-            setError('Failed to send password reset mail')
-        } finally{
-        }
-        setLoading(false)
+        if(!loading){
+            try{
+                setError('')
+                setSuccess('')
+                setLoading(true)
+                await forgotPassword(emailRef.current.value)
+                setSuccess('We have send you a email to reset your password')
+            }catch(e){
+                setSuccess('')
+                setError('Failed to send password reset mail')
+            } finally{
+            }
+            setLoading(false)
+        }   
    }
     return (
      <> 

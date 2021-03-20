@@ -1,11 +1,15 @@
 import React from 'react'
 import {Button,Row,Col,Dropdown, Container} from 'react-bootstrap'
 import style from '../custom.module.scss'
-
-
+import moment from 'moment';
 
 export default function ListItemPost(props) {
     const {text,title,created} = props.post
+
+    function convertTime(time){
+        
+       console.log(moment(time.toDate()).fromNow())
+    }
     return (
             <Row id={style.listItemPost}>
                 <Col sm={10}>
@@ -14,7 +18,7 @@ export default function ListItemPost(props) {
                 </Col>
                 <Col sm={2}>
                     <div className={style.center}>
-                        30min ago
+                        {created && moment(created.toDate()).fromNow()}
                     </div>
                 </Col>
             </Row>
