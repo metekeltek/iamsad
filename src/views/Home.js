@@ -31,33 +31,33 @@ export function Home(){
 function HomeHeader(props){
     return (
         <Row className={style.stickyHeader}>
-            <Col sm={2}>
-                <div className={style.center}>
-                    <FilterPostButton showAll={props.showAll} setShowAll={props.setShowAll}/>
-                </div>
-            </Col>
-            <Col sm={1}>
-                <div className={style.center}>
-                    <AddPostButton/>
-                </div>
-            </Col>
-            <Col  />
-            <Col sm={1}>
-                <div className={style.center}>
-                    <NotificationButton/>
-                </div>
-            </Col>
-            <Col sm={1}>
-                <div className={style.center}>
-                    <HelpButton/>
-                </div>
-            </Col>
-            <Col sm={1}>
-                <div className={style.center}>
-                    <LogoutButton/>
-                </div>
-            </Col>
-        </Row>
+                <Col xs={5} sm={5} md={4} lg={3}>
+                    <div className={style.center}>
+                        <FilterPostButton showAll={props.showAll} setShowAll={props.setShowAll}/>
+                    </div>
+                </Col>
+                <Col xs={0}>
+                    <div className={style.center}>
+                        <AddPostButton/>
+                    </div>
+                </Col>
+                <Col xs={0}>
+                    <div className={style.center}>
+                        <NotificationButton/>
+                    </div>
+                </Col>
+                <Col xs={0}>
+                    <div className={style.center}>
+                        <HelpButton/>
+                    </div>
+                </Col>
+                <Col xs={0}>
+                    <div className={style.center}>
+                        <LogoutButton/>
+                    </div>
+                </Col>
+            </Row>
+        
         )
 }
 //*Buttons

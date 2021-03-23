@@ -3,6 +3,7 @@ import {useAuth} from '../controller/AuthContext'
 import firebase, {firestore} from '../firebase'
 import {Form, Button, Alert, Modal} from 'react-bootstrap'
 import style from '../custom.module.scss'
+import {RiCloseFill} from 'react-icons/ri';
 
 export default function Create(props){
     const {currentUser} = useAuth();
@@ -34,18 +35,19 @@ export default function Create(props){
         
    }
     return(
-        <Modal
-        id={style.createPost}
-        show={props.show}
-        onHide={() => props.setShow(false)}
-        aria-labelledby="create Post"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Create Post
-          </Modal.Title>
-        </Modal.Header>
+    <Modal
+    id={style.modalCreatePostView}
+    contentClassName={style.roundedCorners}
+    show={props.show}
+    onHide={() => props.setShow(false)}
+    aria-labelledby="create Post"
+    centered>
+        <div className={style.modalCreatePostHeaderSection}>
+            <div className={style.closeButton} onClick={()=>props.setShow(false)}><RiCloseFill  size="20"  /></div>
+            <h4>Create Post</h4>
+        </div>
+        <hr id={style.zeroPaddingzeroMargin}/>
+
         <Modal.Body>
             
             {error && <Alert variant="danger">{error}</Alert>}
@@ -58,11 +60,11 @@ export default function Create(props){
                     <Form.Label>Text</Form.Label>
                     <Form.Control as="textarea" ref={textRef} rows={5} />
                 </Form.Group>
-                <Button disabled={loading} className="w-100" type="submit">
+                <Button disabled={loading} className={style.roundedCornersCreateButton} type="submit">
                     create
                 </Button>
             </Form>
         </Modal.Body>
-      </Modal>
+    </Modal>
     )
 }
