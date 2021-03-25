@@ -31,9 +31,7 @@ export default function SignUp(props) {
    }
     return (
      <> 
-     <Card>
-         <Card.Body>
-             <h2 className="text-center mb-4">Sign Up</h2>
+     <div>
              {error && <Alert variant="danger">{error}</Alert>}
              <Form onSubmit={handleSubmit}>
                  <Form.Group id="email">
@@ -52,8 +50,7 @@ export default function SignUp(props) {
                     Sign Up
                 </Button>
              </Form>
-         </Card.Body>
-     </Card>
+     </div>
         <div className="w-100 text-center mt-2">
             Already have an Account?<Button variant="link" className="mt-0 pt-0" onClick={()=> props.onChange("signin")}>Sign In</Button>
         </div>

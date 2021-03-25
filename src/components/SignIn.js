@@ -27,9 +27,7 @@ export default function SignIn(props) {
    }
     return (
      <> 
-     <Card>
-         <Card.Body>
-             <h2 className="text-center mb-4">Sign In</h2>
+     <div>
              {error && <Alert variant="danger">{error}</Alert>}
              <Form onSubmit={handleSubmit}>
                  <Form.Group id="email">
@@ -44,16 +42,16 @@ export default function SignIn(props) {
                     Sign In
                 </Button>
              </Form>
-             <div className="d-flex justify-content-center mt-2">
-             <Button variant="link" onClick={()=> props.onChange("forgotPassword")} >Forgot Password?</Button>
-             </div>
+             
             
-         </Card.Body>
-     </Card>
+     </div>
         <div className="w-100 text-center mt-2">
         
         Have no Account?<Button className="mt-0 pt-0" variant="link" onClick={()=> props.onChange("signup")}>Sign Up</Button>
         </div>
+        <div className="d-flex justify-content-center mt-2">
+             <Button variant="link" onClick={()=> props.onChange("forgotPassword")} >Forgot Password?</Button>
+             </div>
      </>    
     )
 }

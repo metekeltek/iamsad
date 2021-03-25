@@ -30,9 +30,7 @@ export default function ForgotPassword(props) {
    }
     return (
      <> 
-     <Card>
-         <Card.Body>
-             <h2 className="text-center mb-4">Forgot Password?</h2>
+     <div>
              {error && <Alert variant="danger">{error}</Alert>}
              {success && <Alert variant="success">{success}</Alert>}
              <Form onSubmit={handleSubmit}>
@@ -44,8 +42,7 @@ export default function ForgotPassword(props) {
                     Send reset mail
                 </Button>
              </Form>
-         </Card.Body>
-     </Card>
+     </div>
         <div className="w-100 text-center mt-2">
             <Button variant="link" onClick={()=> props.onChange("signin")} >Go back</Button>
         </div>

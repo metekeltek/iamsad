@@ -9,6 +9,7 @@ import {BiHelpCircle} from 'react-icons/bi';
 import {HiOutlineLogout} from 'react-icons/hi';
 import {RiNotificationLine,RiAddFill,RiFilterLine,RiFilterOffLine} from 'react-icons/ri';
 import Create from './Create'
+import Notification from './Notification'
 
 
 //*Main
@@ -84,12 +85,16 @@ function AddPostButton() {
 }
 
 function NotificationButton() {
+    const [show, setShow] = useState(false);
     return (
-        <Button id={style.notificationButton}>
+        <>
+        <Button onClick={() => setShow(true)} id={style.notificationButton}>
             <div className={style.center}>
                 <RiNotificationLine size="25"  />
             </div>
-        </Button>        
+        </Button>  
+        <Notification show={show} setShow={setShow}/>
+        </>      
     )
 }
 

@@ -17,6 +17,8 @@ export default function Post(props){
     const query = commentsRef.orderBy('created', 'asc')
     const [comments] = useCollectionData(query, {idField:'id'})
 
+    const notificationsRef = firestore.collection( 'notifications/' + props.uid + '/notificationList')
+
     const commentRef = useRef()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -48,6 +50,37 @@ export default function Post(props){
                     created: firebase.firestore.FieldValue.serverTimestamp(),
                     uid: currentUser.uid
                 })
+                if(currentUser && props.uid != currentUser.uid){
+                    await notificationsRef.add({
+                        postId: props.id,
+                        created: firebase.firestore.FieldValue.serverTimestamp(),
+                        type: 'commentedPost'
+                    })
+                }
+                console.log(commentRef.current.value.toString())
+                console.log(1)
+
+                if(commentRef.current.value.includes('@')){
+                    console.log(2)
+                    var taggedUser = commentRef.current.value.indexOf('@')+2 
+                    var commentatorId = commentRef.current.value.substring(taggedUser, 1) 
+                    console.log(commentatorId)
+                    
+                    console.log(commentators[commentatorId].toString())
+                    console.log(3)
+
+                    if(commentators[commentatorId] !== '' || commentators[commentatorId] !== null){
+                        var notificationsRef2 = firestore.collection( 'notifications/' + commentators[commentatorId] + '/notificationList')
+                        await notificationsRef2.add({
+                            postId: props.id,
+                            created: firebase.firestore.FieldValue.serverTimestamp(),
+                            type: 'mentionedComment'
+                        })
+                    }
+                    
+
+                }
+                
                 commentRef.current.value = ''
                 dummy.current.scrollIntoView({behavior:'smooth'})
             }catch(e){
