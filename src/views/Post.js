@@ -8,9 +8,6 @@ import style from '../custom.module.scss'
 import moment from 'moment';
 import {RiCloseFill} from 'react-icons/ri';
 
-
-
-
 export default function Post(props){
     const {currentUser} = useAuth()
     const commentsRef = firestore.collection( 'posts/' + props.id + '/comments')
@@ -24,6 +21,9 @@ export default function Post(props){
     const [loading, setLoading] = useState(false)
     const dummy = useRef()
     var commentators = []
+
+    
+
 
     function calculateCommentatorId(commentCreator, postCreator){
         if(postCreator === commentCreator){
@@ -57,28 +57,27 @@ export default function Post(props){
                         type: 'commentedPost'
                     })
                 }
-                console.log(commentRef.current.value.toString())
-                console.log(1)
 
                 if(commentRef.current.value.includes('@')){
-                    console.log(2)
-                    var taggedUser = commentRef.current.value.indexOf('@')+2 
-                    var commentatorId = commentRef.current.value.substring(taggedUser, 1) 
-                    console.log(commentatorId)
-                    
-                    console.log(commentators[commentatorId].toString())
-                    console.log(3)
+                    var taggedUser = commentRef.current.value.indexOf('@')+1 
+                    var commentatorId = commentRef.current.value.substr(taggedUser, 1) 
+                    var commentatorFirestoreId = commentators[commentatorId-1]
+                    if(commentatorId == 'O'){
+                         commentatorFirestoreId = props.uid
+                    }
+                    if(commentatorId == 'o'){
+                        commentatorFirestoreId = props.uid
+                   }
 
-                    if(commentators[commentatorId] !== '' || commentators[commentatorId] !== null){
-                        var notificationsRef2 = firestore.collection( 'notifications/' + commentators[commentatorId] + '/notificationList')
+                    if(commentatorFirestoreId !== '' || commentatorFirestoreId !== null){
+                        var notificationsRef2 = firestore.collection( 'notifications/' + commentatorFirestoreId + '/notificationList')
+
                         await notificationsRef2.add({
                             postId: props.id,
                             created: firebase.firestore.FieldValue.serverTimestamp(),
                             type: 'mentionedComment'
                         })
                     }
-                    
-
                 }
                 
                 commentRef.current.value = ''
